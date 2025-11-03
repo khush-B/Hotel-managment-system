@@ -1,4 +1,9 @@
 package com.hms.hotelmanagmentsystem.repository;
 
-public class RoomRepository {
+
+
+import com.hms.hotelmanagmentsystem.model.Room;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface RoomRepository extends JpaRepository<Room, Integer> {
 }
