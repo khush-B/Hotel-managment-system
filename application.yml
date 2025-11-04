@@ -2,6 +2,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/hotel_management_system
     username: root
+    password: Ajmal761
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:

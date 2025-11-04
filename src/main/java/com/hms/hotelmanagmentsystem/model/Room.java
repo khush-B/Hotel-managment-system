@@ -21,4 +21,6 @@ public class Room {
     @ManyToOne
     @JoinColumn(name = "room_type_id")
     private RoomType roomType;
+
+
 }
