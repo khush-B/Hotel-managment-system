@@ -2,66 +2,134 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Dashboard | Hotel Management System</title>
+<!--    <link rel="stylesheet" th:href="@{/css/style.css}">-->
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 0;
-        }
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f3f6fb;
+    }
 
-        header {
-            background-color: #004aad;
-            color: white;
-            padding: 15px;
-            text-align: center;
-        }
+    .dashboard-container {
+        display: flex;
+        height: 100vh;
+    }
 
-        .container {
-            padding: 40px;
-            text-align: center;
-        }
+    .sidebar {
+        width: 220px;
+        background-color: #1e3a8a;
+        color: white;
+        padding-top: 30px;
+    }
 
-        .card {
-            background-color: white;
-            border-radius: 8px;
-            padding: 25px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            display: inline-block;
-            width: 300px;
-        }
+    .sidebar h2 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
 
-        .logout-btn {
-            background-color: #c62828;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            text-decoration: none;
-        }
+    .sidebar a {
+        display: block;
+        color: white;
+        text-decoration: none;
+        padding: 12px 20px;
+        margin: 5px 0;
+    }
 
-        .logout-btn:hover {
-            background-color: #b71c1c;
-        }
+    .sidebar a:hover {
+        background-color: #2563eb;
+        border-radius: 5px;
+    }
+
+    .main-content {
+        flex: 1;
+        padding: 20px;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        padding: 15px 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .table-container {
+        margin-top: 20px;
+        background-color: white;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f1f5f9;
+    }
     </style>
 </head>
 <body>
-<header>
-    <h1>🏨 Hotel Management System Dashboard</h1>
-</header>
 
-<div class="container">
-    <div class="card">
-        <h2 th:text="'Welcome, ' + ${user.full_name} + '!'"></h2>
-        <p><strong>Username:</strong> <span th:text="${user.username}"></span></p>
-        <p><strong>Role:</strong> <span th:text="${user.role}"></span></p>
+<div class="dashboard-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>🏨 HMS</h2>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/rooms">Rooms</a>
+        <a href="/customers">Customers</a>
+        <a href="/bookings">Bookings</a>
+        <a href="/invoices">Invoices</a>
+        <a href="/logout">Logout</a>
+    </div>
 
-        <a href="/logout" class="logout-btn">Logout</a>
+    <!-- Main content -->
+    <div class="main-content">
+        <div class="header">
+            <h2>Dashboard Overview</h2>
+            <p>Welcome back!</p>
+        </div>
+
+        <div class="table-container">
+            <h3>Recent Bookings</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Customer</th>
+                    <th>Room</th>
+                    <th>Check-in</th>
+                    <th>Check-out</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="b : ${bookings}">
+                    <td th:text="${b.bookingId}"></td>
+                    <td th:text="${b.customer.name}"></td>
+                    <td th:text="${b.room.roomNumber}"></td>
+                    <td th:text="${b.checkInDate}"></td>
+                    <td th:text="${b.checkOutDate}"></td>
+                    <td th:text="${b.status}"></td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(bookings)}">
+                    <td colspan="6" style="text-align:center;">No bookings found</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
 </body>
 </html>
-
