@@ -3,12 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #004aad;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .container {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: inline-block;
+            width: 300px;
+        }
+
+        .logout-btn {
+            background-color: #c62828;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .logout-btn:hover {
+            background-color: #b71c1c;
+        }
+    </style>
 </head>
 <body>
-<h2>Welcome to the Dashboard</h2>
+<header>
+    <h1>🏨 Hotel Management System Dashboard</h1>
+</header>
 
-<p th:text="'Hello, ' + ${user.full_name} + ' (' + ${user.role} + ')!'"></p>
+<div class="container">
+    <div class="card">
+        <h2 th:text="'Welcome, ' + ${user.full_name} + '!'"></h2>
+        <p><strong>Username:</strong> <span th:text="${user.username}"></span></p>
+        <p><strong>Role:</strong> <span th:text="${user.role}"></span></p>
 
-<a href="/logout">Logout</a>
+        <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+</div>
+
 </body>
 </html>
+
